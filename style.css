@@ -1,0 +1,351 @@
+:root {
+    --bg-color: #1a2218;
+    /* Dark Olive Green */
+    --card-bg: rgba(255, 255, 255, 0.05);
+    --text-primary: #ffffff;
+    --text-secondary: #c2c9c0;
+    --accent-income: #2ecc71;
+    --accent-expense: #e74c3c;
+    --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+    --font-family: 'Outfit', sans-serif;
+    --box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-family);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Background Blobs for specific aesthetic */
+.background-blobs {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.blob {
+    position: absolute;
+    filter: blur(80px);
+    opacity: 0.4;
+    border-radius: 50%;
+    animation: move 20s infinite alternate;
+}
+
+.blob-1 {
+    top: 10%;
+    left: 20%;
+    width: 300px;
+    height: 300px;
+    background: #6b8e23;
+    /* Olive Drab */
+    animation-delay: 0s;
+}
+
+.blob-2 {
+    bottom: 20%;
+    right: 10%;
+    width: 400px;
+    height: 400px;
+    background: #556b2f;
+    /* Dark Olive Green */
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    bottom: 10%;
+    left: 10%;
+    width: 250px;
+    height: 250px;
+    background: #8fbc8f;
+    /* Dark Sea Green */
+    animation-delay: -10s;
+}
+
+@keyframes move {
+    from {
+        transform: translate(0, 0) scale(1);
+    }
+
+    to {
+        transform: translate(50px, -50px) scale(1.1);
+    }
+}
+
+.container {
+    margin: 30px auto;
+    width: 400px;
+    background: rgba(255, 255, 255, 0.05);
+    /* slightly more opaque container base */
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: var(--glass-border);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    letter-spacing: 1px;
+    margin: 0;
+    font-weight: 600;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 5px;
+}
+
+h3 {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+    margin: 20px 0 10px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+h4 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+.balance-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.balance-container h1 {
+    font-size: 2.5rem;
+    margin-top: 5px;
+    background: linear-gradient(to right, #fff, #bbb);
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.inc-exp-container {
+    background-color: var(--card-bg);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    border-radius: 12px;
+    border: var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.inc-exp-container>div {
+    flex: 1;
+    text-align: center;
+    z-index: 1;
+}
+
+.inc-exp-container>div:first-of-type {
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.money {
+    font-size: 20px;
+    letter-spacing: 1px;
+    margin: 5px 0;
+    font-weight: 600;
+}
+
+.money.plus {
+    color: var(--accent-income);
+}
+
+.money.minus {
+    color: var(--accent-expense);
+}
+
+.icon-bg {
+    position: absolute;
+    font-size: 4rem;
+    opacity: 0.05;
+    bottom: -10px;
+}
+
+.inc-exp-card.income .icon-bg {
+    right: 55%;
+    color: var(--accent-income);
+}
+
+.inc-exp-card.expense .icon-bg {
+    right: 5%;
+    color: var(--accent-expense);
+}
+
+
+.list {
+    list-style-type: none;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom scrollbar for webkit */
+.list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+
+.list li {
+    background-color: var(--card-bg);
+    box-shadow: var(--box-shadow);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: var(--glass-border);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 40px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.list li.plus {
+    border-right: 5px solid var(--accent-income);
+}
+
+.list li.minus {
+    border-right: 5px solid var(--accent-expense);
+}
+
+.delete-btn {
+    cursor: pointer;
+    background-color: #e74c3c;
+    border: 0;
+    color: #fff;
+    font-size: 20px;
+    line-height: 20px;
+    padding: 2px 5px;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    border-radius: 4px;
+    height: 100%;
+    /* Match height */
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.list li:hover .delete-btn {
+    opacity: 1;
+    transform: translate(-10px, -50%);
+    /* Slide out slightly */
+}
+
+/* Adjust list item text when button is visible - implied by layout, but let's just slide the button */
+
+
+label {
+    display: inline-block;
+    margin: 10px 0;
+    color: var(--text-secondary);
+}
+
+input[type='text'],
+input[type='number'] {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: block;
+    font-size: 16px;
+    padding: 12px;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+    font-family: var(--font-family);
+}
+
+input[type='text']:focus,
+input[type='number']:focus {
+    border-color: #3498db;
+}
+
+.btn {
+    cursor: pointer;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 4px 15px rgba(118, 75, 162, 0.4);
+    color: #fff;
+    border: 0;
+    display: block;
+    font-size: 16px;
+    margin: 20px 0 30px;
+    padding: 12px;
+    width: 100%;
+    border-radius: 8px;
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+    font-family: var(--font-family);
+    font-weight: 500;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(118, 75, 162, 0.6);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 800px;
+    }
+
+    .main-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
