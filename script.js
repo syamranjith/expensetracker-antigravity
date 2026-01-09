@@ -6,6 +6,7 @@ const form = document.getElementById('form');
 const text = document.getElementById('text');
 const amount = document.getElementById('amount');
 const category = document.getElementById('category');
+const date = document.getElementById('date');
 
 const filterBtns = document.querySelectorAll('.filter-btn');
 const expensePieChartEl = document.getElementById('expensePieChart');
@@ -42,7 +43,7 @@ function addTransaction(e) {
       text: text.value,
       amount: +amount.value,
       category: category.value,
-      date: new Date().toISOString() // Store date for filtering
+      date: date.value ? new Date(date.value).toISOString() : new Date().toISOString() // Store date for filtering
     };
 
     transactions.push(transaction);
@@ -57,6 +58,7 @@ function addTransaction(e) {
 
     text.value = '';
     amount.value = '';
+    date.value = new Date().toISOString().split('T')[0];
   }
 }
 
@@ -252,6 +254,9 @@ function init() {
 }
 
 init();
+
+// Set default date to today
+date.value = new Date().toISOString().split('T')[0];
 
 form.addEventListener('submit', addTransaction);
 
